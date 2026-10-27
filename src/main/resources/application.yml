@@ -31,6 +31,9 @@ spring:
 
 server:
   port: ${PORT:8080}
+  # Detrás de Caddy (u otro proxy) usa el dominio y el https reales; así las peticiones
+  # desde el mismo dominio no se tratan como CORS.
+  forward-headers-strategy: framework
 
 app:
   jwt:
