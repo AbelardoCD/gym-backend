@@ -1,0 +1,5 @@
+target/
+uploads/
+.idea/
+# Tus credenciales locales nunca deben terminar dentro de la imagen.
+src/main/resources/application-local.yml

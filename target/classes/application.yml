@@ -1,0 +1,65 @@
+spring:
+  application:
+    name: gym-backend
+  # Valores locales (contraseñas, correo). Ese archivo no se sube a git.
+  config:
+    import: optional:classpath:application-local.yml
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/gym}
+    username: ${DB_USER:gym}
+    password: ${DB_PASSWORD:gym}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true
+  mail:
+    host: ${MAIL_HOST:localhost}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USER:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail.smtp.auth: ${MAIL_AUTH:true}
+      mail.smtp.starttls.enable: ${MAIL_STARTTLS:true}
+      mail.smtp.connectiontimeout: 10000
+      mail.smtp.timeout: 10000
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
+
+server:
+  port: ${PORT:8080}
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:cambia-este-secreto-por-uno-largo-de-al-menos-32-bytes}
+    expiration-minutes: ${JWT_EXPIRATION_MINUTES:1440}
+  storage:
+    path: ${STORAGE_PATH:./uploads}
+  cors:
+    allowed-origins: ${CORS_ORIGINS:http://localhost:5173}
+  admin:
+    email: ${ADMIN_EMAIL:admin@gym.local}
+    password: ${ADMIN_PASSWORD:admin123}
+  mail:
+    # Con false el correo no se envía: se escribe en el log (útil en desarrollo).
+    enabled: ${MAIL_ENABLED:false}
+    from: ${MAIL_FROM:Gimnasio <no-reply@gym.local>}
+  # Datos del gimnasio que aparecen en los recibos.
+  gym:
+    name: ${GYM_NAME:Gimnasio}
+    address: ${GYM_ADDRESS:}
+    phone: ${GYM_PHONE:}
+  receipts:
+    # Envía el recibo en PDF al socio en cuanto se registra su pago.
+    auto-email: ${RECEIPTS_AUTO_EMAIL:true}
+  # URL de prueba mientras no exista la app móvil publicada.
+  mobile-app-url: ${MOBILE_APP_URL:https://gym-app.test/descargar}
+  web-url: ${WEB_URL:http://localhost:5173}
+  # Avisos por correo antes y después de que venza la membresía (todos los días a las 9:00).
+  reminders:
+    enabled: ${REMINDERS_ENABLED:true}
+    days-before: ${REMINDERS_DAYS_BEFORE:3}
+    cron: ${REMINDERS_CRON:0 0 9 * * *}

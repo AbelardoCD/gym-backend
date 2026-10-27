@@ -1,0 +1,13 @@
+# Datos locales: este archivo NO se sube a git (está en .gitignore).
+# Escribe tu correo de Gmail y la contraseña de aplicación de 16 letras.
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: tucorreo@gmail.com
+    password: "xxxx xxxx xxxx xxxx"
+
+app:
+  mail:
+    enabled: true
+    from: "Gimnasio <tucorreo@gmail.com>"
